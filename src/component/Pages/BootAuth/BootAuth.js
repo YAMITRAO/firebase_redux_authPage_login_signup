@@ -2,8 +2,7 @@ import React, {  useState } from 'react'
 import { Form, Button} from 'react-bootstrap'
 import AlertMsg from './AlertMsg'
 import { Alert } from 'react-bootstrap'
-
-const BootAuth = () => {
+const BootAuth = (props) => {
 
     const url = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDwcYCFrLAPoOvfWZN6fmD6d8Luyojx3Fw'
 
@@ -74,6 +73,7 @@ const BootAuth = () => {
       {isAuthSuccess && <AlertMsg title={"Success Auth"} message={"Congrts! You have Successfully SignUp..."} variant={"success"}/> } 
       {isError && <AlertMsg title={"SIGNUP_ERROR"} message={errorMsg} variant={"danger"}/> } 
     <Form className='m-5' onSubmit={ formSubmitHandler } >
+        <h1>SignUp</h1>
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label>Email address</Form.Label>
         <Form.Control type="email" placeholder="Enter email" onChange={(e) => setEmailInput(e.target.value)} value={emailInput} required/>
@@ -100,9 +100,11 @@ const BootAuth = () => {
     </Alert>}
       
       <Button variant="primary" type="submit">
-        Submit
+        SignUp
       </Button>
+      <p>Have an Account <a href='#' onClick={() => props.onsetPage()}> Login</a></p>
     </Form>
+    
     
     </>
   )
