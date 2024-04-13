@@ -33,6 +33,8 @@ const Login = (props) => {
         const data = await response.json();
         console.log(data)
         setIsAuthSuccess(true);
+        props.onMailPage();
+        props.onsetPage();
         //   setTimeout( ( ) => { setIsAuthSuccess(false)}, 2000)
         
       }

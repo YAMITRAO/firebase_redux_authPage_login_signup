@@ -1,0 +1,75 @@
+.container{
+    height:600px;
+    width: 700px;
+    margin: 10px auto;
+    /* display: flex; */
+
+}
+
+.cross{
+    float: right;
+    margin-right: 10px ;
+    font-size: 20px;
+}
+
+.hrLine{
+    
+    width:95%;
+    margin: 10px auto 0px auto;
+    border: 1px solid black;
+}
+
+.toMail, .subject{
+    width:100%;
+    margin-top: 30px;
+    margin-left: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.subject{
+    justify-content: flex-start;
+}
+.toMail > div >label, .subject>label {
+    font-size: 18px;
+    font-family: monospace;
+    padding: 0px 10px;
+}
+
+.toMail > div >input, .subject>input{
+    width: 70% ;
+    border: none;
+    font-size: 18px;
+    border-radius: 10px;
+}
+
+.ccbcc{
+    font-size: 16px;
+    color: rgb(170, 165, 165);
+    padding-right: 30px;
+}
+
+.textArea{
+    width: 95%;
+    height:400px;
+    margin: 0px auto;
+    overflow: scroll;
+    padding-top: 10px;
+    font-size: 20px;
+}
+
+.textArea> textarea{
+    width:100%;
+    height:100%;
+    border: none;
+}
+
+.footer{
+    margin: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+.button {
+    border: none;
+    background-color: inherit;
+}
