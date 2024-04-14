@@ -7,7 +7,7 @@ import Mail from './Pages/Mail/Mail';
 
 const Project = () => {
   const [isSignUpPage, setIsSignUpPage] = useState(false);
-  const [isMail, setIsMail] = useState(true);
+  const [isMail, setIsMail] = useState(false);
   const mailPage = () => {
     setIsMail(true);
   }

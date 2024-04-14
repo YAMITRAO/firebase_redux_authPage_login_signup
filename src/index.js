@@ -6,11 +6,16 @@ import App from './App';
 //     /* The following line can be included in your src/index.js or App.js file */
 //   }
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { Provider } from 'react-redux';
+import dataStore from './redux-data/redux-data';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
+    <Provider store={dataStore}>
+         <App />
+    </Provider>
  
-    <App />
+   
 
 );
 

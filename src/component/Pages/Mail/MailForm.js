@@ -1,41 +1,67 @@
-import React, { useRef } from 'react'
+import React, { useRef, useState } from 'react'
 import style from "./MailForm.module.css"
-import { Button } from 'react-bootstrap'
-import emailjs from '@emailjs/browser';
+import { useDispatch } from 'react-redux';
 
 const MailForm = () => {
-  const form = useRef();
 
-  const sendEmail = (e) => {
-    console.log("clicked")
+  const url = 'https://moviereactapp-3a393-default-rtdb.asia-southeast1.firebasedatabase.app/mailInbox'
+
+  const dispatch = useDispatch();
+  const [emailId, setEmailID] = useState("");
+  const [subject, setSubject] = useState("");
+  const [message, setMessage] = useState("");
+
+  const postApi = async(my_data) => {
+    try{
+        let postUrl = `${url}.json`
+        const response = await fetch(postUrl, {
+            method:"POST",
+            body:JSON.stringify({
+                data:my_data
+            }),
+            headers:{
+                'Content-type':"application/json"
+            }
+        })
+        if(!response.ok){
+            const data = await response.json();
+            throw new Error(data.error.message);
+        }
+        console.log("post api successfulllllll")
+        const data = await response.json();
+        console.log(data);
+        
+    }
+    catch(error){
+        console.log("POST_API_ERROR", error)
+    }
+}
+
+
+  const formSubmitHandler = (e) => {
     e.preventDefault();
-
-    emailjs
-      .sendForm('service_rziz83b', 'template_96tg6s9', form.current, {
-        publicKey: 'M5llJ9jCGZFvcEUtE',
-      })
-      .then(
-        () => {
-          console.log('SUCCESS!');
-        },
-        (error) => {
-          console.log('FAILED...', error.text);
-        },
-      );
-  };
+    let data = {
+      emailId: emailId,
+      emailSubject: subject,
+      emailMessage : message,
+    }
+    // dispatch( mailAction.mailFormLoad(data))
+    postApi(data);
+    // console.log(emailId, subject, message);
+  }
+  
   
   return (
-    <form ref={form} onSubmit={sendEmail}>
+    <form  onSubmit={ formSubmitHandler}>
     <div className={style.container}>
       <div className={style.cross}>
         <button className={style.button}>X</button>
       </div>
-      
 
       <div className={style.mailContainer}>
         <div className={style.toMail}>
-          <div> <label>Email</label>
-          <input type="mail" placeholder='Enter Your Email' name="user_email"/></div>
+          <div> <label>To</label>
+          <input type="mail" placeholder='Enter Your Email' name="user_email" onChange={ (e) => setEmailID(e.target.value)} value={emailId}/></div>
          <div className={style.ccbcc}>Cc / Bcc</div>
         </div>
       <hr className={style.hrLine}/>
@@ -43,12 +69,12 @@ const MailForm = () => {
 
       <div className={style.subject}>
            <label>Subject</label>
-          <input type="text" placeholder='Enter subject here' name="user_name"/>
+          <input type="text" placeholder='Enter subject here' name="user_name" onChange={ (e) => setSubject(e.target.value)} value={subject}/>
         </div>
       <hr className={style.hrLine}/>
 
       <div className={style.textArea}>
-        <textarea name="message" />
+        <textarea name="message" onChange={ (e) => setMessage(e.target.value)} value={message}/>
         {/* <input type="text" placeholder='Enter mail Body'/> */}
       </div>
       <hr className={style.hrLine}/>
