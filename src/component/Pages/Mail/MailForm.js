@@ -1,9 +1,13 @@
 import React, { useRef, useState } from 'react'
 import style from "./MailForm.module.css"
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const MailForm = () => {
+  const navigate = useNavigate();
 
+  
   const url = 'https://moviereactapp-3a393-default-rtdb.asia-southeast1.firebasedatabase.app'
 
   const dispatch = useDispatch();
@@ -59,7 +63,6 @@ const postApiForTo = async(my_data, tome) => {
           ...my_data,
           toMailID: "me",
           fromMailID: "me",
-          
         }
       }
       else{
@@ -80,6 +83,7 @@ const postApiForTo = async(my_data, tome) => {
       }
       console.log("post api successfulllllll")
       const data = await response.json();
+      navigate("/sent");
       console.log(data);
       
   }
@@ -140,7 +144,7 @@ const postApiForTo = async(my_data, tome) => {
       <hr className={style.hrLine}/>
 
       <div className={style.footer}>
-      <input type="submit" value="Send" />
+      <input type="submit" value="Send"  />
         <button className={style.button} type="button">Delete</button>
       </div>
       </div>
