@@ -1,20 +1,26 @@
 import React, { useRef, useState } from 'react'
 import style from "./MailForm.module.css"
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 const MailForm = () => {
 
-  const url = 'https://moviereactapp-3a393-default-rtdb.asia-southeast1.firebasedatabase.app/mailInbox'
+  const url = 'https://moviereactapp-3a393-default-rtdb.asia-southeast1.firebasedatabase.app'
 
   const dispatch = useDispatch();
   const [emailId, setEmailID] = useState("");
   const [subject, setSubject] = useState("");
   const [message, setMessage] = useState("");
+   const fromMailID = useSelector(state =>  state.mail.authMail);
 
-  const postApi = async(my_data) => {
+
+  const postApiForFrom = async(my_data) => {
+    let fromMailId1 = fromMailID.replace("@", "_at_").replaceAll(".", "_dot_")
+  
     try{
-        let postUrl = `${url}.json`
-        const response = await fetch(postUrl, {
+        let postUrlOfFrom = `${url}/${fromMailId1}.json`
+        console.log("Post url of from is :- ");
+        console.log(postUrlOfFrom);
+        const response = await fetch(postUrlOfFrom, {
             method:"POST",
             body:JSON.stringify({
                 data:my_data
@@ -37,17 +43,52 @@ const MailForm = () => {
     }
 }
 
+const postApiForTo = async(my_data) => {
+  let toMailID = my_data.toMailID.replace("@", "_at_");
+  console.log(toMailID);
+  let toMailID1 = toMailID.replaceAll(".", "_dot_");
+  console.log(toMailID1);
+  
+  try{
+      let postUrlOfFrom = `${url}/${toMailID1}.json`
+      console.log("Post url of from is :- ");
+      console.log(postUrlOfFrom);
+      const response = await fetch(postUrlOfFrom, {
+          method:"POST",
+          body:JSON.stringify({
+              data:my_data
+          }),
+          headers:{
+              'Content-type':"application/json"
+          }
+      })
+      if(!response.ok){
+          const data = await response.json();
+          throw new Error(data.error.message);
+      }
+      console.log("post api successfulllllll")
+      const data = await response.json();
+      console.log(data);
+      
+  }
+  catch(error){
+      console.log("POST_API_ERROR", error)
+  }
+}
+
 
   const formSubmitHandler = (e) => {
     e.preventDefault();
     let data = {
-      emailId: emailId,
+      label:"none",
+      toMailID: emailId,
+      fromMailID: fromMailID,
       emailSubject: subject,
       emailMessage : message,
+      time:new Date(),
     }
-    // dispatch( mailAction.mailFormLoad(data))
-    postApi(data);
-    // console.log(emailId, subject, message);
+    postApiForFrom(data);
+    postApiForTo(data);
   }
   
   

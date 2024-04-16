@@ -2,6 +2,7 @@ import React, {  useState } from 'react'
 import { Form, Button} from 'react-bootstrap'
 import AlertMsg from './AlertMsg'
 import { Alert } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
 const BootAuth = (props) => {
 
     const url = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDwcYCFrLAPoOvfWZN6fmD6d8Luyojx3Fw'
@@ -102,7 +103,7 @@ const BootAuth = (props) => {
       <Button variant="primary" type="submit">
         SignUp
       </Button>
-      <p>Have an Account <a href='#' onClick={() => props.onsetPage()}> Login</a></p>
+      <p>Have an Account <Link to="/">Login</Link></p>
     </Form>
     
     

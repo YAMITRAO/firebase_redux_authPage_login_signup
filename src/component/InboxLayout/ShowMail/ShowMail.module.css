@@ -1,0 +1,13 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    height:100%;
+    margin-right: 5px;
+    padding-bottom: 10px;
+}
+
+.mailContainer{
+    border: 2px solid green;
+    width:100%;
+    height:100%;
+}
