@@ -43,7 +43,7 @@ const MailForm = () => {
     }
 }
 
-const postApiForTo = async(my_data) => {
+const postApiForTo = async(my_data, tome) => {
   let toMailID = my_data.toMailID.replace("@", "_at_");
   console.log(toMailID);
   let toMailID1 = toMailID.replaceAll(".", "_dot_");
@@ -53,10 +53,22 @@ const postApiForTo = async(my_data) => {
       let postUrlOfFrom = `${url}/${toMailID1}.json`
       console.log("Post url of from is :- ");
       console.log(postUrlOfFrom);
+      let sentData = {};
+      if(tome){
+        sentData = {
+          ...my_data,
+          toMailID: "me",
+          fromMailID: "me",
+          
+        }
+      }
+      else{
+        sentData = my_data
+      }
       const response = await fetch(postUrlOfFrom, {
           method:"POST",
           body:JSON.stringify({
-              data:my_data
+              data:sentData
           }),
           headers:{
               'Content-type':"application/json"
@@ -88,8 +100,14 @@ const postApiForTo = async(my_data) => {
       time:new Date(),
       isRead: false,
     }
-    postApiForFrom(data);
-    postApiForTo(data);
+    if(emailId === fromMailID){
+      postApiForTo(data, true);
+    }
+    else{
+      postApiForFrom(data);
+      postApiForTo(data, false);
+    }
+   
   }
   
   
