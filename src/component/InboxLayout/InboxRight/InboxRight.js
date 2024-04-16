@@ -1,8 +1,9 @@
 import React from 'react'
 import style from "./InboxRight.module.css"
-import MessageCard from '../../Pages/Card/MessageCard/MessageCard'
+import MessageCard from '../../Pages/Card/MessageCardInbox/MessageCardInbox'
 import { useSelector } from 'react-redux'
 import RightHeader from '../RightHeader/RightHeader'
+import MessageCardInbox from '../../Pages/Card/MessageCardInbox/MessageCardInbox'
 
 
 const InboxRight = () => {
@@ -12,7 +13,7 @@ const InboxRight = () => {
     <div className={style.container}>
        <RightHeader/>
         <div className={style.messages}>
-            {inboxData.map((val) =>  <MessageCard inboxData = {val } />)}
+            {inboxData.map((val) =>  <MessageCardInbox inboxData = {val } />)}
         </div>
     </div>
   )

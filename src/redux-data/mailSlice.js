@@ -22,13 +22,13 @@ const mailSlice = createSlice({
             state.inboxData = [];
             state.sentData = [];
             state.deleteData = [];
-            
+
             for(let x in myMailData){
                 console.log(x);
                 console.log(myMailData[x].data.fromMailID);
                 console.log(state.authMail);
                 if(myMailData[x].data.label === "none"){
-                    if(myMailData[x].data.fromMailID === state.authMail){
+                    if(myMailData[x].data.fromMailID === state.authMail ){
                         let data = {
                             ...myMailData[x].data,
                             id: x,

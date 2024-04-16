@@ -86,6 +86,7 @@ const postApiForTo = async(my_data) => {
       emailSubject: subject,
       emailMessage : message,
       time:new Date(),
+      isRead: false,
     }
     postApiForFrom(data);
     postApiForTo(data);

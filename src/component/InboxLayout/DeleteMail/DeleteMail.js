@@ -1,8 +1,8 @@
 import React from 'react'
 import style from "./DeleteMail.module.css"
 import RightHeader from '../RightHeader/RightHeader';
-import MessageCard from '../../Pages/Card/MessageCard/MessageCard';
 import { useSelector } from 'react-redux';
+import MessageCardDelete from '../../Pages/Card/MessageCardDelete/MessageCardDelete';
 
 const DeleteMail = () => {
     const deleteData = useSelector(state => state.mail.deleteData);
@@ -12,7 +12,7 @@ const DeleteMail = () => {
     <div className={style.container}>
     <RightHeader/>
      <div className={style.messages}>
-         {deleteData.map((val) =>  <MessageCard inboxData = {val }/>)}
+         {deleteData.map((val) =>  <MessageCardDelete inboxData = {val }/>)}
      </div>
  </div>
   )
