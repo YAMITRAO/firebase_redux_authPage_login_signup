@@ -6,10 +6,7 @@ import { useNavigate } from 'react-router-dom';
 
 const MailForm = () => {
   const navigate = useNavigate();
-
-  
   const url = 'https://moviereactapp-3a393-default-rtdb.asia-southeast1.firebasedatabase.app'
-
   const dispatch = useDispatch();
   const [emailId, setEmailID] = useState("");
   const [subject, setSubject] = useState("");

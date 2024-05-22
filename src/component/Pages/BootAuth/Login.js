@@ -64,6 +64,7 @@ const Login = (props) => {
         
         console.log(data);
         dispatch( mailAction.authInformation(email));
+        dispatch(authAction.authHandler());
         await getApi(email);
         setIsAuthSuccess(true);
       }

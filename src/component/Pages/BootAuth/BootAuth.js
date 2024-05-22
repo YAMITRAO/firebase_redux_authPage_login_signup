@@ -69,7 +69,7 @@ const BootAuth = (props) => {
       }
 
 
-  return (
+  return 
     <>
       {isAuthSuccess && <AlertMsg title={"Success Auth"} message={"Congrts! You have Successfully SignUp..."} variant={"success"}/> } 
       {isError && <AlertMsg title={"SIGNUP_ERROR"} message={errorMsg} variant={"danger"}/> } 
@@ -105,10 +105,8 @@ const BootAuth = (props) => {
       </Button>
       <p>Have an Account <Link to="/">Login</Link></p>
     </Form>
-    
-    
     </>
-  )
+  
 }
 
 export default BootAuth
